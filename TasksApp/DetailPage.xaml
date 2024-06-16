@@ -5,7 +5,68 @@
              Title="DetailPage"
              xmlns:viewmodel="clr-namespace:TasksApp.ViewModel"
              x:DataType="viewmodel:DetailViewModel">
-    <Grid RowDefinitions="*, *, *, *, *">
-        
-    </Grid>
+    <ScrollView>
+        <Frame CornerRadius="15"
+               Margin="50"
+               Background="{Binding Model.taskColor}"
+               >
+            <Grid Padding="15"
+                  Background="{Binding Model.taskColor}"
+                  RowDefinitions="auto, *, auto"
+                  RowSpacing="10"
+                  ColumnSpacing="10">
+                
+                <Grid ColumnDefinitions="auto, *">
+
+                    <Button Text="Back"
+                            Grid.Column="0"
+                            Command="{Binding BackCommand}"
+                            CornerRadius="200"/>
+                    <Label Text="{Binding Model.Title}"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="Header"/>
+                    
+                </Grid>
+
+                <Frame Grid.Row="1" CornerRadius="15">
+                    <Grid RowDefinitions="*, *, *, auto"
+                          ColumnDefinitions="auto, *"
+                          RowSpacing="10"
+                          ColumnSpacing="10"
+                          Padding="10"
+                          HorizontalOptions="Center">
+                        <Label Text="Added Date"
+                               VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding Model.AddedDateTime}"
+                                    Grid.Row="0" 
+                                    Grid.Column="1"
+                                    IsEnabled="False"/>
+
+                        <Label Text="Target date"
+                               Grid.Row="1"
+                               VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding Model.TargetDate}"
+                                    Grid.Row="1"
+                                    Grid.Column="1"/>
+
+                        <Label Text="Description"
+                               VerticalOptions="Center"
+                               Grid.Row="2"/>
+                        <Editor Text="{Binding Model.Description}"
+                                Placeholder="Description"
+                                Grid.Row="2"
+                                Grid.Column="1"/>
+                    </Grid>
+                </Frame>
+
+                <Button Text="Edit"
+                        CornerRadius="200"
+                        Grid.Row="2"
+                        HorizontalOptions="End"/>
+
+            </Grid>
+        </Frame>
+    </ScrollView>
 </ContentPage>

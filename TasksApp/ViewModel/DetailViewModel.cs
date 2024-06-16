@@ -1,21 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
 using TasksApp.Model;
-using Windows.ApplicationModel.VoiceCommands;
 
 namespace TasksApp.ViewModel
 {
-    [QueryProperty("Model","Model")]
+    [QueryProperty(nameof(Model), "Model")]
     public partial class DetailViewModel : ObservableObject
     {
-
         [ObservableProperty]
         TaskModel model;
 
+        [RelayCommand]
         async Task Back()
         {
             await Shell.Current.GoToAsync("..");

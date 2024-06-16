@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TasksApp.Model;
+using Windows.Services.Maps;
 
 namespace TasksApp.ViewModel
 {
@@ -65,7 +66,10 @@ namespace TasksApp.ViewModel
         [RelayCommand]
         async Task Tap(TaskModel m)
         {
-            await Shell.Current.GoToAsync($"{nameof(DetailPage)}? Model={m}");
+            await Shell.Current.GoToAsync($"{nameof(DetailPage)}", new Dictionary<string, Object>
+            {
+                { nameof(Model), m }
+            });
         }
     }
 }
