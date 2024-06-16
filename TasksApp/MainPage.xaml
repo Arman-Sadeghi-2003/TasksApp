@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:TasksApp.ViewModel"
+             x:DataType="viewmodel:MainViewModel"
+             xmlns:model="clr-namespace:TasksApp.Model"
+             x:Class="TasksApp.MainPage">
+
+    <ScrollView>
+        <Grid RowDefinitions="100, auto, auto, *"
+              ColumnDefinitions="*, *, *"
+              RowSpacing="10"
+              ColumnSpacing="10"
+              Padding="10">
+
+            <Image Source="moon.png" 
+                   Grid.ColumnSpan="3"/>
+
+            <Entry Grid.Row="1" 
+                   Grid.Column="0" 
+                   Placeholder="Title"
+                   Text="{Binding Model.Title}"/>
+            <DatePicker Grid.Row="1" 
+                        Grid.Column="1"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center"
+                        Date="{Binding Model.TargetDate}"/>
+            <Grid Grid.Row="1"
+                  Grid.Column="2"
+                  ColumnDefinitions="*,*,*,*"
+                  ColumnSpacing="5"
+                  RowSpacing="5">
+                <RadioButton Background="#FF701C1A" 
+                             IsChecked="{Binding RedRadioButton}"/>
+                <RadioButton Background="#FFF4B315" 
+                             Grid.Column="1"
+                             IsChecked="{Binding YellowRadioButton}"/>
+                <RadioButton Background="#FF62dd39" 
+                             Grid.Column="2"
+                             IsChecked="{Binding GreenRadioButton}"/>
+                <RadioButton Background="#FFFF4F00" 
+                             Grid.Column="3"
+                             IsChecked="{Binding OrangeRadioButton}"/>
+            </Grid>
+            <Editor Placeholder="Description"
+                    Grid.Row="2" 
+                    Grid.ColumnSpan="2"
+                    HeightRequest="100"
+                    Text="{Binding Model.Description}"/>
+            
+            <Button Text="Add" 
+                    Grid.Row="2" 
+                    Grid.Column="2"
+                    VerticalOptions="End"
+                    Command="{Binding AddCommand}"/>
+
+            <CollectionView Grid.Row="3"
+                            Grid.ColumnSpan="4"
+                            ItemsSource="{Binding Tasks}"
+                            SelectionMode="None"
+                            HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:TaskModel">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem BackgroundColor="#FFAE1918"
+                                               Text="Delete"
+                                               />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid>
+                                <Frame Background="{Binding taskColor}">
+                                    <Label Text="{Binding Title}"/>
+                                </Frame>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
