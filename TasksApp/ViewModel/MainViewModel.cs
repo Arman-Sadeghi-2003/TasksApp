@@ -58,7 +58,8 @@ namespace TasksApp.ViewModel
         [RelayCommand]
         void Remove(TaskModel model)
         {
-
+            if (Tasks.Contains(model))
+                Tasks.Remove(model);
         }
 
         [RelayCommand]
