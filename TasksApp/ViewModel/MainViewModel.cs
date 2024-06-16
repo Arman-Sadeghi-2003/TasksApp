@@ -56,16 +56,16 @@ namespace TasksApp.ViewModel
         }
 
         [RelayCommand]
-        void Remove(TaskModel model)
+        void Remove(TaskModel m)
         {
-            if (Tasks.Contains(model))
-                Tasks.Remove(model);
+            if (Tasks.Contains(m))
+                Tasks.Remove(m);
         }
 
         [RelayCommand]
-        async Task Tap(TaskModel model)
+        async Task Tap(TaskModel m)
         {
-
+            await Shell.Current.GoToAsync($"{nameof(DetailPage)}? Model={m}");
         }
     }
 }
