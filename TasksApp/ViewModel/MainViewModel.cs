@@ -14,10 +14,13 @@ namespace TasksApp.ViewModel
 
         public MainViewModel()
         {
-            load();
             Model = new TaskModel();
             RedRadioButton = true;
+            Shell.Current.Navigated += Current_Navigated; ;
         }
+
+        private async void Current_Navigated(object? sender, ShellNavigatedEventArgs e)
+            => await load();
 
         [ObservableProperty]
         TaskModel model;
@@ -38,6 +41,13 @@ namespace TasksApp.ViewModel
         {
             if (string.IsNullOrEmpty(Model.Title))
                 return;
+
+            foreach (var task in Tasks)
+                if(task.Title.Contains(Model.Title))
+                {
+                    await Shell.Current.DisplayAlert("Repeated!", $"{Model.Title} is exists in the repository.\nplease set diffrent title", "OK");
+                    return;
+                }
 
             if (!(RedRadioButton || YellowRadioButton || GreenRadioButton || OrangeRadioButton))
                 RedRadioButton = true;

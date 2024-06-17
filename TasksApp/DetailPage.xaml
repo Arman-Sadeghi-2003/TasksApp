@@ -51,20 +51,36 @@
                                     Grid.Row="1"
                                     Grid.Column="1"/>
 
+                        <Label Text="Is done" 
+                               Grid.Row="2"
+                               VerticalOptions="Center"/>
+                        <CheckBox Grid.Row="2"
+                                  Grid.Column="1"
+                                  IsChecked="{Binding Model.IsDone}"/>
+
                         <Label Text="Description"
                                VerticalOptions="Center"
-                               Grid.Row="2"/>
+                               Grid.Row="3"/>
                         <Editor Text="{Binding Model.Description}"
                                 Placeholder="Description"
-                                Grid.Row="2"
+                                Grid.Row="3"
                                 Grid.Column="1"/>
                     </Grid>
                 </Frame>
 
-                <Button Text="Edit"
-                        CornerRadius="200"
-                        Grid.Row="2"
-                        HorizontalOptions="End"/>
+                <HorizontalStackLayout Grid.Row="2"
+                                       HorizontalOptions="End">
+                    <Button Text="Edit"
+                            CornerRadius="200"
+                            Command="{Binding EditCommand}"
+                            CommandParameter="{Binding Model}"/>
+
+                    <Button Text="Delete"
+                            CornerRadius="200"
+                            Command="{Binding DeleteCommand}"
+                            CommandParameter="{Binding Model}"/>
+
+                </HorizontalStackLayout>
 
             </Grid>
         </Frame>

@@ -78,7 +78,12 @@
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=TapCommand}"
                                                               CommandParameter="{Binding .}"/>
                                     </Frame.GestureRecognizers>
-                                    <Label Text="{Binding Title}"/>
+                                    <Grid ColumnDefinitions="*,auto">
+                                        <Label Text="{Binding Title}"/>
+                                        <Label Text="Done!"
+                                               IsVisible="{Binding IsDone}"
+                                               Grid.Column="1"/>
+                                    </Grid>
                                 </Frame>
                             </Grid>
                         </SwipeView>
