@@ -30,7 +30,7 @@
                     
                 </Grid>
 
-                <Frame Grid.Row="1" CornerRadius="15">
+                <Frame Background="Black" Grid.Row="1" CornerRadius="15">
                     <Grid RowDefinitions="*, *, *, auto"
                           ColumnDefinitions="auto, *"
                           RowSpacing="10"

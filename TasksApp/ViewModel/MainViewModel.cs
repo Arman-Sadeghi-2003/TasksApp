@@ -2,18 +2,19 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TasksApp.Model;
-using Windows.Services.Maps;
 
 namespace TasksApp.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
+        PathWorker pathWorker = new PathWorker();
+
         [ObservableProperty]
         ObservableCollection<Model.TaskModel> tasks;
 
         public MainViewModel()
         {
-            tasks = new ObservableCollection<Model.TaskModel>();
+            load();
             Model = new TaskModel();
             RedRadioButton = true;
         }
@@ -33,7 +34,7 @@ namespace TasksApp.ViewModel
 
 
         [RelayCommand]
-        void Add()
+        async Task Add()
         {
             if (string.IsNullOrEmpty(Model.Title))
                 return;
@@ -53,14 +54,19 @@ namespace TasksApp.ViewModel
 
             Tasks.Add(Model);
 
+            await save();
+
             Model = new TaskModel();
         }
 
         [RelayCommand]
-        void Remove(TaskModel m)
+        async Task Remove(TaskModel m)
         {
             if (Tasks.Contains(m))
+            {
                 Tasks.Remove(m);
+                await save();
+            }
         }
 
         [RelayCommand]
@@ -70,6 +76,21 @@ namespace TasksApp.ViewModel
             {
                 { nameof(Model), m }
             });
+        }
+
+
+        async Task save()
+        {
+            await ObjectSerializer.SerializeToFile(pathWorker.GetTastsFilePath, Tasks);
+        }
+
+        async Task load()
+        {
+            if (pathWorker.IsTasksFileExists)
+                Tasks = await ObjectSerializer.DeserializeFromFile<ObservableCollection<Model.TaskModel>>(pathWorker.GetTastsFilePath);
+            else
+                Tasks = new ObservableCollection<Model.TaskModel>();
+
         }
     }
 }

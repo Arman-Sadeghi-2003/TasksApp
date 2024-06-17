@@ -15,5 +15,7 @@ namespace TasksApp.ViewModel
         {
             await Shell.Current.GoToAsync("..");
         }
+
+        
     }
 }
