@@ -7,7 +7,7 @@ namespace TasksApp.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
-        PathWorker pathWorker = new PathWorker();
+        PathWorker pathWorker = PathWorker.Instance;
 
         [ObservableProperty]
         ObservableCollection<Model.TaskModel> tasks;

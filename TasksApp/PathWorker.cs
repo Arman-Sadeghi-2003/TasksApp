@@ -4,6 +4,21 @@ namespace TasksApp
 {
     public class PathWorker
     {
+        private PathWorker() { }
+
+        private static PathWorker instance;
+
+        public static PathWorker Instance
+        {
+            get
+            {
+                if(instance == null)
+                    instance = new PathWorker();
+
+                return instance;
+            }
+        }
+
         string binFile = Path.Combine(FileSystem.AppDataDirectory, "Bin");
         public string DirectoryPath
         {

@@ -9,7 +9,7 @@ namespace TasksApp.ViewModel
     public partial class DetailViewModel : ObservableObject
     {
         List<TaskModel> tasks;
-        PathWorker pathWorker = new PathWorker();
+        PathWorker pathWorker = PathWorker.Instance;
 
         public DetailViewModel()
         {
